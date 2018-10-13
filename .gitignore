@@ -1,0 +1,15 @@
+*.iws
+*.war
+.classpath
+.DS_Store
+.project
+.settings
+/*.launch
+/*.tmproj
+/out/**
+stacktrace.log
+test/reports
+build/*
+.idea/*
+HollyPortal/target/*
+lib/cachedir/*

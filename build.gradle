@@ -1,0 +1,51 @@
+apply plugin: 'application'
+            apply plugin: 'groovy'
+            apply plugin: 'ivy-publish'
+            apply plugin: 'maven-publish'
+
+            version = '1.0'
+
+            repositories {
+                flatDir name:'groovy',  dirs:'/Users/reid gareth/Documents/Programs/Grails/lib/org.codehaus.groovy/groovy-all/jars/'
+                mavenCentral();
+            }
+
+            dependencies
+                    {
+                        compile files (fileTree(dir: 'lib', include: ['*.jar']))
+                        //compile 'org.codehaus.groovy:groovy-all:2.3.7'
+                        compile 'org.codehaus.groovy:groovy-all:2.3.7'
+        }
+
+targetCompatibility = 1.6
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
+
+task buildRadiateJar(type: Jar) {
+    from files(sourceSets.main.output)
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+        configurations.runtime.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    with jar
+
+    sourceSets.main {
+        groovy.srcDirs = ['src']
+        resources.srcDirs = ['src']
+    }
+
+    manifest {
+        attributes 'Implementation-Title': 'Radiate',
+                'Implementation-Version': version
+    }
+
+
+}
+
