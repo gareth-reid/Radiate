@@ -9,6 +9,7 @@ import java.nio.Buffer
  * Created by reid gareth on 17/12/2014.
  */
 
+//Not fully accurate yet - nedd to read in byte array length but is is overflowing memory
 public class NextSeqQualityMetricData extends SeqMetrics<QualityMetric> {
 
     private BigDecimal readFourBytesToInt(BufferedReader br){
@@ -35,7 +36,7 @@ public class NextSeqQualityMetricData extends SeqMetrics<QualityMetric> {
         }
 
 
-        //TODO get nchars
+        //TODO get nchars and refactor into parse method
         int records = 8192 / (200 * 8)//_toolBox.GetInt8(Arrays.copyOfRange(array, 1, 2) ) * 8
         def qualityMetric = new QualityMetric(Records: 0)
         //int records = 0
@@ -76,11 +77,17 @@ public class NextSeqQualityMetricData extends SeqMetrics<QualityMetric> {
         return qualityMetric.QScores.get(i)
     }
 }
-//# QualityMetrics format according to ILMN specs:
-//#
-//#   byte 0: file version number (4)
+//# v5 QualityMetrics format of NextSeq, HiSeq X, and HiSeq instruments running RTA v1.18.64 and newer
+//# according to ILMN specs :
+//# byte 0: file version number (5)
 //#   byte 1: length of each record
-//#   bytes (N * 206 + 2) - (N * 206 + 207): record:
+//#   byte 2: quality score binning (byte flag representing if binning was on)
+//#   if (byte 2 == 1) // quality score binning on
+//#       byte 3: number of quality score bins, B
+//#       bytes 4 – (4+B-1): lower boundary of quality score bins
+//#       bytes (4+B) – (4+2*B-1): upper boundary of quality score bins
+//#       bytes (4+2*B) – (4+3*B-1): remapped scores of quality score bins
+//#   bytes (N * 206 + 2) - (N *206 + 207): record:
 //#       2 bytes: lane number (uint16)
 //#       2 bytes: tile number (uint16)
 //#       2 bytes: cycle number (uint16)

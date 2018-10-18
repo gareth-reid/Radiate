@@ -12,12 +12,12 @@ import org.petermac.radiate.quality.NextSeqQualityMetricData
  */
 public class qualityTests
 {
+    //simple tests to run for debugging and check code not broken
     @Test
     public void IndexMiSeqTest()
     {
         def quality = new MiSeqQualityMetricData()
         def data = quality.Execute("/Volumes/bioinf_pipeline/Runs/MiSeq/181011_M01053_0785_000000000-C4LP2/")
-        //def data = index.Execute("/Users/File/NextSeqInterOp/")
         Assert.assertNotNull(data)
     }
 
@@ -26,7 +26,6 @@ public class qualityTests
     {
         def quality = new NextSeqQualityMetricData()
         def data = quality.Execute("/Volumes/bioinf_pipeline/Runs/NextSeq/181015_NS500817_0404_AH3HNJBGX9/")
-        //def data = index.Execute("/Users/File/NextSeqInterOp/")
         Assert.assertNotNull(data)
     }
 

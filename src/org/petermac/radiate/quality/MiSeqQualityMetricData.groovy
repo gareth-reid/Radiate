@@ -27,11 +27,7 @@ public class MiSeqQualityMetricData extends SeqMetrics<QualityMetric> {
         for (int j = 0; j < records; j++) {
             try {
                 Parse(pointer, array)
-               //if (j > 0) {//first one}
-               //     qm.IncrementWithPrevious(qualityMetrics.get(j - 1)) //add to previous
-                //}
                 pointer = _qualityMetric.ArrayPointer
-                //qualityMetrics.add(qm)
             }
             catch (Exception e) {
                 break
@@ -70,7 +66,7 @@ public class MiSeqQualityMetricData extends SeqMetrics<QualityMetric> {
         return _qualityMetric.QScores.get(i)
     }
 }
-//# QualityMetrics format according to ILMN specs:
+//# V4 QualityMetrics format according to ILMN specs:
 //#
 //#   byte 0: file version number (4)
 //#   byte 1: length of each record
