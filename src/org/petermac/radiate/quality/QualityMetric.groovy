@@ -11,10 +11,14 @@ public class QualityMetric
     public QualityMetric()
     {
         QScores = new LinkedList<Integer>()
+        for (int i = 0; i < 50; i++){
+            QScores.add(0)
+        }
     }
     public String TileNumber
     public String LaneNumber
     public String CycleNumber
+    public int Records
 
     public List<BigDecimal> QScores
 

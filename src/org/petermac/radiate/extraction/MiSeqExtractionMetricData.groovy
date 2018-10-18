@@ -1,16 +1,15 @@
 package org.petermac.radiate.extraction
 
-import org.petermac.radiate.MiSeqMetrics
+import org.petermac.radiate.SeqMetrics
 import org.petermac.radiate.ToolBox
 import org.petermac.radiate.index.IndexMetric
+import org.petermac.radiate.quality.QualityMetric
 
 /**
  * Created by reid gareth on 17/12/2014.
  */
 
-public class MiSeqExtractionMetricData extends MiSeqMetrics<ExtractionMetric>
-{
-    private ToolBox _toolBox = new ToolBox()
+public class MiSeqExtractionMetricData extends SeqMetrics<ExtractionMetric> {
 
     public List<IndexMetric> Execute(path)
     {
@@ -39,7 +38,7 @@ public class MiSeqExtractionMetricData extends MiSeqMetrics<ExtractionMetric>
         return extractionMetrics
     }
 
-    public ExtractionMetric Parse(int start, byte[] array)
+    public ExtractionMetric Parse(int start, byte[] arraym)
     {
         def extractionMetric = new ExtractionMetric()
         int arrayPointer = start

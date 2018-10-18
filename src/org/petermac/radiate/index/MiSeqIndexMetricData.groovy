@@ -1,15 +1,14 @@
 package org.petermac.radiate.index
 
-import org.petermac.radiate.MiSeqMetrics
+import org.petermac.radiate.SeqMetrics
 import org.petermac.radiate.ToolBox
+import org.petermac.radiate.quality.QualityMetric
 
 /**
  * Created by reid gareth on 17/12/2014.
  */
 
-public class MiSeqIndexMetricData extends MiSeqMetrics<IndexMetric>
-{
-    private ToolBox _toolBox = new ToolBox()
+public class MiSeqIndexMetricData extends SeqMetrics<IndexMetric> {
 
     public List<IndexMetric> Execute(path)
     {

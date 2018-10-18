@@ -24,7 +24,7 @@ public class ToolBox
         return str
     }
 
-    public int GetInt32(byte[] bytes) //4 bytes
+    public BigDecimal GetInt32(byte[] bytes) //4 bytes
     {
        //UInt32 unsignedInt = new UInt32(bytes)
         //return unsignedInt.uint32Value()
@@ -74,7 +74,7 @@ public class ToolBox
         return int16;
     }
 
-    public byte[] ReadFromStream(InputStream inputStream) throws Exception
+    public List<byte[]> ReadFromStream(InputStream inputStream) throws Exception
     {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
@@ -85,8 +85,11 @@ public class ToolBox
             dos.write(data, 0, count);
             count = inputStream.read(data);
         }
-
-        return baos.toByteArray();
+        def byteArray = baos.toByteArray();
+        baos.flush();
+        dos.flush();
+        inputStream.close()
+        return Arrays.asList(byteArray);
     }
 
     public byte SetBit(byte value, int bit){
