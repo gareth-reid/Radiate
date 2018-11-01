@@ -13,8 +13,17 @@ public class indexTests
     public void IndexTest()
     {
         def index = new MiSeqIndexMetricData()
-        def data = index.Execute("/Volumes/bioinf_pipeline/Runs/MiSeq/180516_M01053_0713_000000000-BRB4C/")
+        def data = index.Execute("/Volumes/bioinf_pipeline/Runs/MiSeq/181026_M00139_0384_000000000-C5M2H/")
         //def data = index.Execute("/Users/File/NextSeqInterOp/")
         Assert.assertNotSame(0, data.size())
     }
+
+    @Test
+    public void IndexTest_GetValue()
+    {
+        def index = new MiSeqIndexMetricData()
+        def result = index.GetValue(987, 3000)
+        Assert.assertNotSame(0, result)
+    }
+
 }

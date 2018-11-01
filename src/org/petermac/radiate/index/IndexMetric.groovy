@@ -17,6 +17,7 @@ public class IndexMetric
     public String Lane
     public String Tile
     public String Read
+    public String Sequencer
     public String SampleNameAndIndex
     {
 

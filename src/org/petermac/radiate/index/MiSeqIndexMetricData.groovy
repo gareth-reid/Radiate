@@ -80,7 +80,11 @@ public class MiSeqIndexMetricData extends SeqMetrics<IndexMetric> {
         return indexMetric
     }
 
-
+    public static Double GetValue(BigDecimal numberOfClusters, int reads){
+        Double clustersReadRatio = numberOfClusters / reads
+        Double clustersReadRatioAsPercentage = clustersReadRatio * 100
+        return clustersReadRatioAsPercentage.round(2)
+    }
 }
 
 //Reports the indexes count. Format:

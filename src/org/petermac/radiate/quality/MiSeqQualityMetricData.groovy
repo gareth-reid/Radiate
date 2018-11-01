@@ -23,8 +23,10 @@ public class MiSeqQualityMetricData extends SeqMetrics<QualityMetric> {
         if (array.length == 0) {
             return new QualityMetric()
         }
-        int records = array.length / _toolBox.GetInt8(Arrays.copyOfRange(array, 1, 2)) * 8
-        for (int j = 0; j < records; j++) {
+        //(N * 206 + 2) - (N * 206 + 207)
+        int records = _toolBox.GetInt8(array[1])
+        int totalRecords = records * 8
+        for (int j = 0; j < totalRecords; j++) {
             try {
                 Parse(pointer, array)
                 pointer = _qualityMetric.ArrayPointer
@@ -35,7 +37,7 @@ public class MiSeqQualityMetricData extends SeqMetrics<QualityMetric> {
         }
         _qualityMetric.Records = records
         for (int i = 0; i < 50; i++){
-            _qualityMetric.QScores.set(i, (int)_qualityMetric.QScores.get(i)  / _qualityMetric.Records)
+            _qualityMetric.QScores.set(i, ((int)_qualityMetric.QScores.get(i)  / _qualityMetric.Records * 2))
         }
         return _qualityMetric
     }

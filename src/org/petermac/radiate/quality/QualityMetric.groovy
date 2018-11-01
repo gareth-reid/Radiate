@@ -18,21 +18,22 @@ public class QualityMetric
     public String TileNumber
     public String LaneNumber
     public String CycleNumber
+    public String Sequencer
     public int Records
 
     public List<BigDecimal> QScores
 
     public int ArrayPointer
 
-    public void IncrementWithPrevious(QualityMetric qm)
+    public Double PercentageOfScoresAbove(int numberAbove = 30)
     {
-        List<BigDecimal> tmpQscores = new LinkedList<Integer>()
-        for (int i = 0; i < qm.QScores.size(); i++){
-            def thisOne = QScores.get(i)
-            def prevOne = qm.QScores.get(i)
-            tmpQscores.add(thisOne + prevOne)
+        try {
+            int totalClusters = QScores.sum()
+            int clustersAbove = QScores[numberAbove - 1..QScores.size() - 1].sum()
+            return ((Double) ((clustersAbove / totalClusters)) * 100).round(1)
+        } catch(Exception e){
+            return 0
         }
-        QScores = tmpQscores
     }
 
 

@@ -3,7 +3,7 @@ apply plugin: 'application'
             apply plugin: 'ivy-publish'
             apply plugin: 'maven-publish'
 
-            version = '1.0'
+            version = '2.1'
 
             repositories {
                 flatDir name:'groovy',  dirs:'/Users/reid gareth/Documents/Programs/Grails/lib/org.codehaus.groovy/groovy-all/jars/'
